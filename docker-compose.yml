@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  db:
+    image: postgres:10-alpine
+    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - 5000:5432
+    restart: unless-stopped
