@@ -37,7 +37,7 @@ func (tc *testCase) save(db *sqlx.DB) error {
 
 func (tc *testCase) check(db *sqlx.DB, t *testing.T) {
 	var rows []testRow
-	query := "select numeric_param, real_param from records where name = $1"
+	query := "select numeric_param, real_param::numeric from records where name = $1"
 	if err := db.Select(&rows, query, tc.name); err != nil {
 		t.Error(err)
 	}
